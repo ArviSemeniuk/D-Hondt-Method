@@ -8,25 +8,9 @@ namespace D_Hondt_Method
     {
         static void Main(string[] args)
         {
-            ReadFile();
-        }
-
-        static void ReadFile()
-        {
-            string line;
-            List<string> electionResults = new List<string>();
-
-            StreamReader lines = new StreamReader("Assessment1Data.txt");
-
-            for (int i = 1; i < 4; i++)
-            {
-                lines.ReadLine();
-            }
-            while ((line = lines.ReadLine()) != null)
-            {
-                electionResults.Add(line);
-            }
-            ComputeResults(electionResults);
+            ReadFile read = new ReadFile();
+            List<string> data = read.ReadResultsFromFile("Assessment1Data.txt");
+            ComputeResults(data);
         }
 
         static void ComputeResults(List<string> electionResults)
