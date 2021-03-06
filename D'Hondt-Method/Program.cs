@@ -31,31 +31,9 @@ namespace D_Hondt_Method
 
         static void ComputeResults(List<string> electionResults)
         {
-            List<int> votes = new List<int>();
-            int seats = 5; // number of seats that are to be allocated 
-
-            foreach (string party in electionResults)
-            {
-                string[] results = party.Split(',', ';');
-                votes.Add(Int32.Parse(results[1]));
-            }
-            //Console.WriteLine(votes[0]);
-            for (int i = 0; i <= seats; i++)
-            {
-                if (votes[0] >= votes[i])
-                {
-                    votes[0] = votes[0] / 2; // 2 needs to be replaced with an int <variable> since it depends on how many seats the party has already got  
-                }
-                else
-                {
-                    votes[i] = votes[i] / 2; // some fixes need to be made here (incorrect division)
-                }
-            }
-            foreach (int vote in votes)
-            {
-                Console.WriteLine(vote);
-            }
-            //Console.WriteLine(votes[0]);
+            // Spent 5 hours trying to figure this out...
+            // No progress...
+            // I want to die
         }
     }
 }
