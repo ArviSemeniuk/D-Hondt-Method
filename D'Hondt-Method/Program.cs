@@ -31,9 +31,20 @@ namespace D_Hondt_Method
 
         static void ComputeResults(List<string> electionResults)
         {
-            // Spent 5 hours trying to figure this out...
-            // No progress...
-            // I want to die
+            Dictionary<int, int> votes = new Dictionary<int, int>();
+            int partyID = 1; // The key for the votes dict
+
+            foreach (string party in electionResults)
+            {
+                string[] result = party.Split(',');
+                votes.Add(partyID, Int32.Parse(result[1]));
+                partyID++;
+            }
+
+            foreach (KeyValuePair<int, int> kvp in votes)
+            {
+                Console.WriteLine($"Key = {kvp.Key} Value = {kvp.Value}");
+            }
         }
     }
 }
