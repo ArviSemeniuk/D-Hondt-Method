@@ -31,17 +31,19 @@ namespace D_Hondt_Method
 
         static void ComputeResults(List<string> electionResults)
         {
-            Dictionary<int, int> votes = new Dictionary<int, int>();
+            Dictionary<int, Tuple<int, int>> votes = new Dictionary<int, Tuple<int, int>>();
+            int seatsWon = 0; // Variable to keep track of seats won by each party
             int partyID = 1; // The key for the votes dict
 
             foreach (string party in electionResults)
             {
                 string[] result = party.Split(',');
-                votes.Add(partyID, Int32.Parse(result[1]));
+                var votesAndSeats = new Tuple<int, int>(Int32.Parse(result[1]), seatsWon);
+                votes.Add(partyID, votesAndSeats);
                 partyID++;
             }
 
-            foreach (KeyValuePair<int, int> kvp in votes)
+            foreach (KeyValuePair<int, Tuple<int, int>> kvp in votes)
             {
                 Console.WriteLine($"Key = {kvp.Key} Value = {kvp.Value}");
             }
