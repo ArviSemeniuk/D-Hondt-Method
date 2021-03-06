@@ -22,5 +22,10 @@ namespace D_Hondt_Method
 
             return electionResults;
         }
+
+        public void ReadAvailableSeats()
+        {
+            // To Do
+        }
     }
 }
