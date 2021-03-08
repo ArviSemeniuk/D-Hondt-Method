@@ -23,9 +23,9 @@ namespace D_Hondt_Method
             return electionResults;
         }
 
-        public void ReadAvailableSeats()
+        public void ReadAvailableSeats(string filename)
         {
-            // To Do
+            //Not sure what to do here...
         }
     }
 }
