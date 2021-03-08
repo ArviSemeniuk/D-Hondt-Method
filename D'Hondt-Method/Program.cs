@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.IO;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace D_Hondt_Method
@@ -15,21 +17,45 @@ namespace D_Hondt_Method
 
         static void ComputeResults(List<string> electionResults)
         {
-            Dictionary<string, int> partyVotes = new Dictionary<string, int>();
-            List<string> names = new List<string>();
-            
+            SortedList<int, int> votes = new SortedList<int, int>();
+            SortedList<int, int> seatsWon = new SortedList<int, int>();
+            SortedList<int, int> originalVote = new SortedList<int, int>();
+            int partyID = 1;
+            int seats = 0;
+
             foreach (string party in electionResults)
             {
-                string[] temp = party.Split(",");
-                partyVotes.Add(temp[0], Int32.Parse(temp[1]));
+                string[] res = party.Split(',');
+                votes.Add(partyID, Int32.Parse(res[1]));
+                seatsWon.Add(partyID, seats);
+                originalVote.Add(partyID, Int32.Parse(res[1]));
+                partyID++;
             }
 
-            foreach (KeyValuePair<string, int> kvp in partyVotes)
+            Allocation(votes, seatsWon, originalVote);
+        }
+
+        static void Allocation(SortedList<int, int> votes, SortedList<int, int> seatsWon, SortedList<int, int> orginal)
+        {
+            int availableSeats = 5;
+
+            for (int i = 1; i <= availableSeats; i++)
             {
-                names.Add(kvp.Key);
+                var orderByValue = votes.OrderByDescending(kvp => kvp.Value);
+                int topVote = orderByValue.ElementAt(0).Key;
+                int secondVote = orderByValue.ElementAt(1).Key;
+
+                if (votes[topVote] > votes[secondVote])
+                {
+                    seatsWon[topVote] = seatsWon[topVote] + 1;
+                    votes[topVote] = orginal[topVote] / (seatsWon[topVote] + 1);
+                }
             }
-            //Console.WriteLine(names[0]); //Brexit Party
-            //Console.WriteLine(partyVotes[names[0]]); //452321
+
+            foreach (var seats in seatsWon)
+            {
+                Console.WriteLine(seats);
+            }
         }
     }
 }
