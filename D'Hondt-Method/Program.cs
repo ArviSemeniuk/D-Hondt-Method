@@ -19,6 +19,7 @@ namespace D_Hondt_Method
         {
             SortedList<int, int> votes = new SortedList<int, int>();
             SortedList<int, int> seatsWon = new SortedList<int, int>();
+            SortedList<int, int> originalVote = new SortedList<int, int>();
             int partyID = 1;
             int seats = 0;
 
@@ -27,35 +28,33 @@ namespace D_Hondt_Method
                 string[] res = party.Split(',');
                 votes.Add(partyID, Int32.Parse(res[1]));
                 seatsWon.Add(partyID, seats);
+                originalVote.Add(partyID, Int32.Parse(res[1]));
                 partyID++;
             }
 
-            // Console.WriteLine(votes[1]); // Output: 452321
-            // Console.WriteLine(seatsWon[1]); // Output: 0
-            // int x = votes[1] /= 2; 
-            // Console.WriteLine(x); // Output: 226160
-            //votes[1] /= 3;
-
-            //var orderByValue = votes.OrderByDescending(kvp => kvp.Value);
-            //int top = orderByValue.ElementAt(0).Key;
-            //votes[top] /= 2;
-            //Console.WriteLine(votes[top]);
-            
+            Allocation(votes, seatsWon, originalVote);
         }
 
-        static void Allocation(Dictionary<string, int> partyVotes, List<string> names, List<int> originalVote)
+        static void Allocation(SortedList<int, int> votes, SortedList<int, int> seatsWon, SortedList<int, int> orginal)
         {
-            int seatsAvailable = 5;
-            int seatsWon = 0;
+            int availableSeats = 5;
 
-            for (int i = 1; i < seatsAvailable; i++)
+            for (int i = 1; i <= availableSeats; i++)
             {
-   
-                //while (partyVotes[] > partyVotes[])
+                var orderByValue = votes.OrderByDescending(kvp => kvp.Value);
+                int topVote = orderByValue.ElementAt(0).Key;
+                int secondVote = orderByValue.ElementAt(1).Key;
+
+                if (votes[topVote] > votes[secondVote])
                 {
-                    seatsWon++;
-                    partyVotes[names[0]] = partyVotes[names[0]] / (seatsWon + 1);
+                    seatsWon[topVote] = seatsWon[topVote] + 1;
+                    votes[topVote] = orginal[topVote] / (seatsWon[topVote] + 1);
                 }
+            }
+
+            foreach (var seats in seatsWon)
+            {
+                Console.WriteLine(seats);
             }
         }
     }
