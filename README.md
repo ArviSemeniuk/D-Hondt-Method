@@ -6,7 +6,7 @@ Parties participating in this voting system list their top candidates in order s
 The party with the most votes wins a seat and then their vote is divided by one plus the number of seats they have. So if a party has one seat their total vote is divided by two.
 After the votes have been updated, the party with highest votes tally now gets a seat and the same process applies to them. This continues until all the seats in the region have been allocated.
 
-For a more detailed description visit:
+For a more detailed description visit the following sites:
 
 https://www.bbc.co.uk/news/uk-politics-27187434  
 https://ukandeu.ac.uk/eu-elections-voting-system-explained-dhondt-worry/
