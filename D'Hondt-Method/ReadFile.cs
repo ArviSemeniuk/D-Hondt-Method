@@ -68,5 +68,16 @@ namespace D_Hondt_Method
 
             return availableSeats;
         }
+
+        public string ReadRegion()
+        {
+            string region;
+            region = Lines.ReadLine();
+
+            Lines.DiscardBufferedData();
+            Lines.BaseStream.Seek(0, SeekOrigin.Begin);
+
+            return region;
+        }
     }
 }
