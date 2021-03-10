@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace D_Hondt_Method
 {
     class ReadFile
     {
         private List<string> _ElectionResults = new List<string>();
-        private StreamReader _Lines = new StreamReader("Assessment1Data.txt");
+        private StreamReader _Lines = new StreamReader("../../../Assessment1Data.txt");
         private string _Line;
         private int _LineNumber;
 
