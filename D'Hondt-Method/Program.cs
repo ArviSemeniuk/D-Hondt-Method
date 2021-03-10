@@ -50,8 +50,6 @@ namespace D_Hondt_Method
 
         static void ComputeResults(List<string> electionResults)
         {
-            //SortedList<int, string> partySeats = new SortedList<int, string>();
-            //SortedList<int, string> partyName = new SortedList<int, string>();
             SortedList<int, int> votes = new SortedList<int, int>();
             SortedList<int, int> seatsWon = new SortedList<int, int>();
             SortedList<int, int> originalVote = new SortedList<int, int>();
