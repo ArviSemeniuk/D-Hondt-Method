@@ -11,8 +11,10 @@ namespace D_Hondt_Method
         static void Main(string[] args)
         {
             ReadFile read = new ReadFile();
-            List<string> data = read.ReadResultsFromFile("Assessment1Data.txt");
-            ComputeResults(data);
+            List<string> electionResults = read.ReadResultsFromFile();
+            ComputeResults(electionResults);
+            int availableSeats = read.ReadAvailableSeats();
+            Console.WriteLine(availableSeats);
         }
 
         static void ComputeResults(List<string> electionResults)
@@ -30,6 +32,7 @@ namespace D_Hondt_Method
             {
                 string seatsTemp = "";
                 string[] res = party.Split(',');
+
                 partyName.Add(partyID, res[0]);
                 votes.Add(partyID, Int32.Parse(res[1]));
                 seatsWon.Add(partyID, seats);
@@ -42,11 +45,10 @@ namespace D_Hondt_Method
                     }
                     else {
                         seatsTemp = seatsTemp +","+ res[i];
-                        
                     }
                 }
 
-                seatsTemp = seatsTemp.Remove(seatsTemp.Length - 1, 1);
+                seatsTemp = seatsTemp.Remove(seatsTemp.Length - 1, 1); // Removes semicolon from the end of the string
                 partySeats.Add(partyID, seatsTemp);
                 
                 partyID++;
@@ -71,26 +73,33 @@ namespace D_Hondt_Method
                     votes[topVote] = orginal[topVote] / (seatsWon[topVote] + 1);
                 }
             }
-            
+
+            DisplayResults(seatsWon, partySeats, partyName);
+        }
+
+        static void DisplayResults(SortedList<int, int> seatsWon, SortedList<int, string> partySeats, SortedList<int, string> partyName)
+        {
             Console.WriteLine("East Midlands (European Parliament Constituency)");
             foreach (var seats in seatsWon)
-            {   
-                if (seats.Value > 0) {
-                string partySeatsAllocated = "";
-                string[] sTemp = partySeats[seats.Key].Split(',');
-                for (int i = 0; i < seats.Value; i++)
+            {
+                if (seats.Value > 0)
                 {
-                    if (i==0){
-                        partySeatsAllocated = sTemp[i];
-                    }
-                    else {
-                        partySeatsAllocated = partySeatsAllocated +","+ sTemp[i];
-                    }
-                    
-                }
-                Console.WriteLine(partyName[seats.Key] + ": " + partySeatsAllocated);
-                } 
+                    string partySeatsAllocated = "";
+                    string[] sTemp = partySeats[seats.Key].Split(',');
+                    for (int i = 0; i < seats.Value; i++)
+                    {
+                        if (i == 0)
+                        {
+                            partySeatsAllocated = sTemp[i];
+                        }
+                        else
+                        {
+                            partySeatsAllocated = partySeatsAllocated + "," + sTemp[i];
+                        }
 
+                    }
+                    Console.WriteLine(partyName[seats.Key] + ": " + partySeatsAllocated);
+                }
             }
         }
     }
