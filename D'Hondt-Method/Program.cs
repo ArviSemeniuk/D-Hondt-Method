@@ -115,9 +115,12 @@ namespace D_Hondt_Method
                         }
                         else
                         {
-                            partySeatsAllocated = partySeatsAllocated + "," + sTemp[i];
+                            try // Prevents error if the number of seats in the .txt file is above 12
+                            {
+                                partySeatsAllocated = partySeatsAllocated + "," + sTemp[i];
+                            }
+                            catch { } 
                         }
-
                     }
                     Console.WriteLine(PartyName[seats.Key] + ": " + partySeatsAllocated);
                 }
