@@ -92,11 +92,8 @@ namespace D_Hondt_Method
                 int topVote = orderByValue.ElementAt(0).Key;
                 int secondVote = orderByValue.ElementAt(1).Key;
 
-                if (votes[topVote] > votes[secondVote])
-                {
-                    seatsWon[topVote] = seatsWon[topVote] + 1;
-                    votes[topVote] = orginal[topVote] / (seatsWon[topVote] + 1);
-                }
+                seatsWon[topVote] = seatsWon[topVote] + 1;
+                votes[topVote] = orginal[topVote] / (seatsWon[topVote] + 1);
             }
 
             DisplayResults(seatsWon);
