@@ -90,7 +90,6 @@ namespace D_Hondt_Method
             {
                 var orderByValue = votes.OrderByDescending(kvp => kvp.Value);
                 int topVote = orderByValue.ElementAt(0).Key;
-                int secondVote = orderByValue.ElementAt(1).Key;
 
                 seatsWon[topVote] = seatsWon[topVote] + 1;
                 votes[topVote] = orginal[topVote] / (seatsWon[topVote] + 1);
